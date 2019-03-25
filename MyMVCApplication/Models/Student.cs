@@ -11,9 +11,6 @@ namespace MyMVCApplication.Models
         public int StudentId { get; set; }
         public string StudentName { get; set; }
         public int Age { get; set; }
-    }
-    public static class studentlist {
-
         public static List<Student> students = new List<Student>(){
                     new Student(){ StudentId=1, StudentName="John", Age = 18 },
                     new Student(){ StudentId=2, StudentName="Steve", Age = 21 },
@@ -24,4 +21,8 @@ namespace MyMVCApplication.Models
                     new Student(){ StudentId=7, StudentName="Rob", Age = 19 }
                 };
     }
+    
+
+        
+    
 }

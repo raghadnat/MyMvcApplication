@@ -14,35 +14,58 @@ namespace MyMVCApplication.Controllers
         // GET: Student
         public ActionResult Index()
         {
-            return View(studentlist.students);
+            return View(Student.students);
         }
 
         public ActionResult Edit(int? Id)
         {
-            var st = studentlist.students.Where(s => s.StudentId == Id).FirstOrDefault();
-
-            return View(st);
+            Student student;
+            if (Id == null)
+            {
+                student = new Student();
+                
+            }
+            else
+            {
+                student = Student.students.Where(s => s.StudentId == Id).FirstOrDefault();
+                
+            }
+            return View(student);
         }
 
         [HttpPost]
         public ActionResult Edit(Student std ,int? Id)
         {
-            Student st = new Student();
+            Student student ;
 
             if (Id == null)
             {
-                st.StudentName = std.StudentName;
-                st.Age = std.Age;
-                st.StudentId = 3;
-                studentlist.students.Add(st);
+                student = new Student();
+                student.StudentName = std.StudentName;
+                student.Age = std.Age;
+                
+                Student.students.Add(student);
             }
             else {
 
-                var stt = studentlist.students.Where(s => s.StudentId == Id).FirstOrDefault();
-                stt.StudentName = std.StudentName;
-                stt.Age = std.Age;
+                student = Student.students.Where(s => s.StudentId == Id).FirstOrDefault();
+                student.StudentName = std.StudentName;
+                student.Age = std.Age;
             }
-            return RedirectToAction("Index", st);
+            return RedirectToAction("Index");
+        }
+        
+        public ActionResult Delete(int Id) {
+            Student student = Student.students.Where(s => s.StudentId == Id).FirstOrDefault();
+            return View(student); 
+        }
+
+        [HttpPost]
+        public ActionResult Delete(Student std) {
+
+            var student = Student.students.Where(s => s.StudentId == std.StudentId).FirstOrDefault();
+            Student.students.Remove(student);
+            return RedirectToAction("Index");
         }
     }
 }
