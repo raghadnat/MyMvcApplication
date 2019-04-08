@@ -43,11 +43,11 @@ namespace MyMVCApplication.Controllers
             if (ModelState.IsValid)
             {
                 var students = StudentSVC.Get();
-                /*bool nameAlreadyExists = students.Exists(x => x.StudentName == std.fname && x.StudentId != std.StudentId);
+                bool nameAlreadyExists = students.Exists(x => x.fname == std.fname && x.mname == std.mname && x.lname == std.lname && x.StudentId != std.StudentId);
                 if (nameAlreadyExists  ) {
                     ModelState.AddModelError(String.Empty, "Student Name already exist");
                     return View(std);
-                }*/
+                }
                 if (std.StudentId == 0)
                 {
                     //generate Id 
