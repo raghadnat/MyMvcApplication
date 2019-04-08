@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "testLayout";
+    Layout = "~/Views/Shared/_myLayoutPage.cshtml";
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+}
+
+<div class="jumbotron">
+    <h2>testLayout</h2>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <p>this is body</p>
+    </div>
+    @section footer{
+        <p class="lead">
+            this is footer
+        </p>
+
+    }
+</div>
+
+
+
+
+

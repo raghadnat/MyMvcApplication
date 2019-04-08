@@ -1,0 +1,15 @@
+D:\study\MyMVCApplication\BLL\bin\Debug\BLL.dll.config
+D:\study\MyMVCApplication\BLL\bin\Debug\BLL.dll
+D:\study\MyMVCApplication\BLL\bin\Debug\BLL.pdb
+D:\study\MyMVCApplication\BLL\bin\Debug\DAL.dll
+D:\study\MyMVCApplication\BLL\bin\Debug\EntityFramework.dll
+D:\study\MyMVCApplication\BLL\bin\Debug\EntityFramework.SqlServer.dll
+D:\study\MyMVCApplication\BLL\bin\Debug\DAL.pdb
+D:\study\MyMVCApplication\BLL\bin\Debug\DAL.dll.config
+D:\study\MyMVCApplication\BLL\bin\Debug\EntityFramework.xml
+D:\study\MyMVCApplication\BLL\bin\Debug\EntityFramework.SqlServer.xml
+D:\study\MyMVCApplication\BLL\obj\Debug\BLL.csprojAssemblyReference.cache
+D:\study\MyMVCApplication\BLL\obj\Debug\BLL.csproj.CoreCompileInputs.cache
+D:\study\MyMVCApplication\BLL\obj\Debug\BLL.csproj.CopyComplete
+D:\study\MyMVCApplication\BLL\obj\Debug\BLL.dll
+D:\study\MyMVCApplication\BLL\obj\Debug\BLL.pdb

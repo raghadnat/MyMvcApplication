@@ -2,19 +2,24 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using MyMVCApplication.Models;
 using System.Web.Mvc;
+using BLL;
+using DAL;
+using DAL.Entity;
 
 namespace MyMVCApplication.Controllers
 {
-
+    [Log]
     public class StudentController : Controller
     {
-        
+        StudentService StudentSVC = new StudentService();
         // GET: Student
+
         public ActionResult Index()
         {
-            return View(Student.students);
+            var Students = StudentSVC.Get();
+            ViewBag.Count = Students.Count();
+            return View(Students);
         }
 
         public ActionResult Edit(int? Id)
@@ -22,50 +27,62 @@ namespace MyMVCApplication.Controllers
             Student student;
             if (Id == null)
             {
-                student = new Student();
-                
+                student  = new Student();
             }
             else
             {
-                student = Student.students.Where(s => s.StudentId == Id).FirstOrDefault();
-                
+                student = StudentSVC.GetById(Id.Value);
             }
             return View(student);
         }
 
         [HttpPost]
-        public ActionResult Edit(Student std ,int? Id)
+        public ActionResult Edit(Student std)
         {
-            Student student ;
-
-            if (Id == null)
+            Student student;
+            if (ModelState.IsValid)
             {
-                student = new Student();
-                student.StudentName = std.StudentName;
-                student.Age = std.Age;
-                
-                Student.students.Add(student);
+                var students = StudentSVC.Get();
+                /*bool nameAlreadyExists = students.Exists(x => x.StudentName == std.fname && x.StudentId != std.StudentId);
+                if (nameAlreadyExists  ) {
+                    ModelState.AddModelError(String.Empty, "Student Name already exist");
+                    return View(std);
+                }*/
+                if (std.StudentId == 0)
+                {
+                    //generate Id 
+                    StudentSVC.Add(std);
+                }
+                else
+                {
+                    StudentSVC.Edit(std);
+                }
+                return RedirectToAction("Index");
             }
             else {
-
-                student = Student.students.Where(s => s.StudentId == Id).FirstOrDefault();
-                student.StudentName = std.StudentName;
-                student.Age = std.Age;
+                return View(std);
             }
-            return RedirectToAction("Index");
         }
         
         public ActionResult Delete(int Id) {
-            Student student = Student.students.Where(s => s.StudentId == Id).FirstOrDefault();
-            return View(student); 
+            var result = StudentSVC.GetById(Id);
+            return View(result); 
         }
 
         [HttpPost]
         public ActionResult Delete(Student std) {
-
-            var student = Student.students.Where(s => s.StudentId == std.StudentId).FirstOrDefault();
-            Student.students.Remove(student);
+            StudentSVC.Delete(std.StudentId);
             return RedirectToAction("Index");
         }
+
+        public ActionResult testLayout() {
+            return View();
+        }
+        public ActionResult Details(int Id)
+        {
+            var result = StudentSVC.GetById(Id);
+            return View(result);
+        }
+
     }
 }
