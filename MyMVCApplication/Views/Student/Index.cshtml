@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DAL.Entity.Student>
+﻿@model MyMVCApplication.Models.StudentViewModel
 
 @{
     ViewBag.Title = "Index";
@@ -15,22 +15,22 @@
             @Html.DisplayName("Name")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Age)
+            @Html.DisplayName("Age")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.gender)
+            @Html.DisplayName("gender")
         </th>
 
         <th>
-            @Html.DisplayNameFor(model => model.Active)
+            @Html.DisplayName("Active")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CreationDate)
+            @Html.DisplayName("CreationDate")
         </th>
         <th></th>
     </tr>
 
-    @foreach (var item in Model)
+    @foreach (var item in Model.Students)
     {
 <tr>
     <td>
@@ -54,12 +54,73 @@
     <td>
         @Html.ActionLink("Edit", "Edit", new { id = item.StudentId }) |
         @Html.ActionLink("Details", "Details", new { id = item.StudentId }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.StudentId })
+        @Html.ActionLink("Delete", "Delete", new { id = item.StudentId }) |
+        @Html.ActionLink("AssignStudentToClass","AssignStudentToClass")
     </td>
+</tr>
+    }
+
+</table>
+<label>Total Students:</label> @ViewBag.Count
+<br /><br />
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Name")
+        </th>
+        <th>
+            @Html.DisplayName("StartTime")
+        </th>
+        <th>
+            @Html.DisplayName("EndTime")
+        </th>
+        <th>
+            @Html.DisplayName("TeacherID")
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model.Classes)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.StartTime)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.EndTime)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.TeacherID)
+    </td>
+
 </tr>
     }
 
 
 </table>
-<label>Total Students:</label> @ViewBag.Count
+<nav>
+    <ul class="pagination">
+        <li aria-label="pravious">
+            <a href="#" aria-hidden="true">&laquo;</a>
+        </li>
+        @for (int i=1;i<= ViewBag.TotalPage; i++)
+        {
+            <li>
+                <a href="@Url.Action("Index", new { page = i  })">@i</a>
+            </li>
+        }
+        <li aria-label="Next">
+            <a href="#" aria-hidden="true">&raquo;</a>
+        </li>
+    </ul>
+</nav>
+
+
+
+
+
+
 

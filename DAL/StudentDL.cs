@@ -11,14 +11,17 @@ namespace DAL
     public class StudentDL
     {
         Context DbContext = new Context();
-        public List<Student> Get()
+        public List<Student> Get(int Skip , int PageSize)
         {
-            
-            return DbContext.students.ToList();
+            var Result = DbContext.students.OrderBy(std => std.StudentId).Skip(Skip).Take(PageSize).ToList(); ;
+            return Result;
         }
         public Student GetById(int Id)
         {
             return DbContext.students.Where(s => s.StudentId == Id).FirstOrDefault();
+        }
+        public List<Student> GetAll() {
+            return DbContext.students.ToList();
         }
         public Student Add(Student std)
         {

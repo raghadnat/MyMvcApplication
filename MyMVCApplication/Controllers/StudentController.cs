@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using BLL;
 using DAL;
 using DAL.Entity;
+using MyMVCApplication.Models;
 
 namespace MyMVCApplication.Controllers
 {
@@ -13,13 +14,19 @@ namespace MyMVCApplication.Controllers
     public class StudentController : Controller
     {
         StudentService StudentSVC = new StudentService();
+        ClassesService ClassesSVC = new ClassesService();
         // GET: Student
 
-        public ActionResult Index()
+        public ActionResult Index(int page =1)
         {
-            var Students = StudentSVC.Get();
-            ViewBag.Count = Students.Count();
-            return View(Students);
+            StudentViewModel Model = new StudentViewModel();
+            int PageSize = 3;
+            int Skip = (page * PageSize) - PageSize;
+            Model.Students = StudentSVC.Get(Skip, PageSize);
+            Model.Classes = ClassesSVC.Get();
+            ViewBag.Count = StudentSVC.GetAll().Count();
+            ViewBag.TotalPage = (ViewBag.Count / PageSize) + ((ViewBag.Count % PageSize) > 0 ? 1 : 0);
+            return View(Model);
         }
 
         public ActionResult Edit(int? Id)
@@ -42,7 +49,7 @@ namespace MyMVCApplication.Controllers
             Student student;
             if (ModelState.IsValid)
             {
-                var students = StudentSVC.Get();
+                var students = StudentSVC.GetAll();
                 bool nameAlreadyExists = students.Exists(x => x.fname == std.fname && x.mname == std.mname && x.lname == std.lname && x.StudentId != std.StudentId);
                 if (nameAlreadyExists  ) {
                     ModelState.AddModelError(String.Empty, "Student Name already exist");
@@ -83,6 +90,8 @@ namespace MyMVCApplication.Controllers
             var result = StudentSVC.GetById(Id);
             return View(result);
         }
-
+        public ActionResult AssignStudentToClass() {
+            return PartialView();
+        }
     }
 }

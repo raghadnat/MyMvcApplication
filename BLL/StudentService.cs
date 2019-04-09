@@ -13,10 +13,14 @@ namespace BLL
 
 
         StudentDL StudentDAL = new StudentDL();
-        public List<Student> Get()
+        public List<Student> Get(int Skip, int PageSize)
         {
-            var Result = StudentDAL.Get();
+            var Result = StudentDAL.Get(Skip,PageSize);
             return Result;
+        }
+        public List<Student> GetAll() {
+
+            return StudentDAL.GetAll();
         }
         public Student GetById(int Id)
         {

@@ -14,6 +14,9 @@ namespace DAL.Entity.Context
         }
 
         public DbSet<Student> students { get; set; }
+        public DbSet<Classes> Classes { set; get; }
+        public DbSet<Teacher> Teachers { set; get; }
+
 
     }
 
