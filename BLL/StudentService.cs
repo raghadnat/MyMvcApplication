@@ -13,10 +13,10 @@ namespace BLL
 
 
         StudentDL StudentDAL = new StudentDL();
-        public List<Student> Get(int Skip, int PageSize)
+        public List<Student> Get(int Skip, int PageSize,String SearchString)
         {
-            var Result = StudentDAL.Get(Skip,PageSize);
-            return Result;
+           var  Result = StudentDAL.Get(Skip, PageSize, SearchString);
+           return Result;
         }
         public List<Student> GetAll() {
 
@@ -28,6 +28,8 @@ namespace BLL
         }
         public Student Add(Student std)
         {
+            bool nameAlreadyExists = StudentDAL.GetAll().Exists(x => x.fname == std.fname && x.mname == std.mname && x.lname == std.lname && x.StudentId != std.StudentId);
+
             var Result = StudentDAL.Add(std);
             return Result;
         }
@@ -41,6 +43,9 @@ namespace BLL
             var Result = StudentDAL.Delete(Id);
             return Result;
         }
-
+        public bool NameAlreadyExist(Student std) {
+            bool nameAlreadyExists = StudentDAL.GetAll().Exists(x => x.fname == std.fname && x.mname == std.mname && x.lname == std.lname && x.StudentId != std.StudentId);
+            return nameAlreadyExists;
+        }
     }
 }

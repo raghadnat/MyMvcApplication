@@ -4,9 +4,6 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
-
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -39,13 +36,26 @@
         </div>
     </div>
     <div class="form-group">
+        @Html.LabelFor(model => model.DOB, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.DOB, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.DOB, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
         @Html.LabelFor(model => model.Age, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.Age, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Age, "", new { @class = "text-danger" })
         </div>
     </div>
-
+    <div class="form-group">
+        @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+        </div>
+    </div>
     <div class="form-group">
         @Html.LabelFor(model => model.gender, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
@@ -54,7 +64,7 @@
         </div>
     </div>
     <div class="form-group">
-       
+
         <div class="col-md-1">
             @Html.LabelFor(model => model.Active, htmlAttributes: new { @class = "control-label col-md-2" })
             @Html.EditorFor(model => model.Active, new { htmlAttributes = new { @class = "form-control" } })
@@ -66,6 +76,24 @@
         <div class="col-md-10">
             @Html.EditorFor(model => model.CreationDate, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.CreationDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.CreatedBy, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.CreatedBy, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.CreatedBy, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.Label("Address", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.contactInfo.City, new { htmlAttributes = new { @class = "form-control" , placeholder = "City"} })
+            @Html.ValidationMessageFor(model => model.contactInfo.City, "", new { @class = "text-danger" })
+            @Html.EditorFor(model => model.contactInfo.Country, new { htmlAttributes = new { @class = "form-control",placeholder = "Country" } })
+            @Html.ValidationMessageFor(model => model.contactInfo.Country, "", new { @class = "text-danger" })
+            @Html.EditorFor(model => model.contactInfo.ZipCode, new { htmlAttributes = new { @class = "form-control",placeholder = "ZipCode" } })
+            @Html.ValidationMessageFor(model => model.contactInfo.ZipCode, "", new { @class = "text-danger" })
         </div>
     </div>
 

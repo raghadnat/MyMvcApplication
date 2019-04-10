@@ -148,11 +148,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AssignClassViewModel.cs" />
     <Compile Include="Models\StudentViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />
+    <Content Include="fonts\bootstrap.css" />
     <Content Include="fonts\bootstrap.js" />
     <Content Include="fonts\bootstrap.min.css" />
     <Content Include="fonts\bootstrap.min.js" />
@@ -160,6 +162,7 @@
     <Content Include="Global.asax" />
     <Content Include="Areas\admin\Views\web.config" />
     <Content Include="Areas\admin\Views\AdminTools\GetTools.cshtml" />
+    <Content Include="Sidebar\sidebar.css" />
     <Content Include="Views\Shared\_LayoutNew.cshtml" />
     <Content Include="Views\Student\Details.cshtml" />
     <Content Include="Views\Classes\Index.cshtml" />
@@ -183,7 +186,6 @@
     <None Include="_bin_deployableAssemblies\amd64\sqlceca40.dll" />
     <None Include="_bin_deployableAssemblies\amd64\Microsoft.VC90.CRT\README_ENU.txt" />
     <None Include="_bin_deployableAssemblies\amd64\Microsoft.VC90.CRT\msvcr90.dll" />
-    <Content Include="Sidebar\Sidebar.css" />
     <Content Include="Sidebar\Sidebar.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

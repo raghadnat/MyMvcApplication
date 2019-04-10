@@ -16,6 +16,6 @@ namespace DAL.Entity
         public DateTime EndTime { set; get; }
         public int TeacherID { set; get; }
         public Teacher  Teacher { set; get; }
-
+        
     }
 }

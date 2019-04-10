@@ -9,6 +9,17 @@
 <p>
     @Html.ActionLink("Create New", "Edit")
 </p>
+@using (Html.BeginForm("Index","Student"))
+{
+    
+    <div>
+        Search By Name @Html.TextBox("SearchString")
+        <input type="submit" value="Search" class="btn btn-default" />
+    </div>
+
+}
+
+
 <table class="table">
     <tr>
         <th>
@@ -55,7 +66,7 @@
         @Html.ActionLink("Edit", "Edit", new { id = item.StudentId }) |
         @Html.ActionLink("Details", "Details", new { id = item.StudentId }) |
         @Html.ActionLink("Delete", "Delete", new { id = item.StudentId }) |
-        @Html.ActionLink("AssignStudentToClass","AssignStudentToClass")
+        @Html.ActionLink("AssignClass","AssignStudentToClass")
     </td>
 </tr>
     }
@@ -109,7 +120,7 @@
         @for (int i=1;i<= ViewBag.TotalPage; i++)
         {
             <li>
-                <a href="@Url.Action("Index", new { page = i  })">@i</a>
+                <a href="@Url.Action("Index", new { page = i  , SearchString = @ViewBag.CurrentFilter})">@i</a>
             </li>
         }
         <li aria-label="Next">

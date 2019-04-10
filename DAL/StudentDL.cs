@@ -11,9 +11,17 @@ namespace DAL
     public class StudentDL
     {
         Context DbContext = new Context();
-        public List<Student> Get(int Skip , int PageSize)
+        public List<Student> Get(int Skip , int PageSize , string SearchString)
         {
-            var Result = DbContext.students.OrderBy(std => std.StudentId).Skip(Skip).Take(PageSize).ToList(); ;
+            List<Student > Result;
+            if (!String.IsNullOrEmpty(SearchString))
+            {
+                var StudentOrder = DbContext.students.OrderBy(std => std.StudentId).Skip(Skip).Take(PageSize);
+                Result = StudentOrder.Where(s => s.fname.Contains(SearchString) || s.mname.Contains(SearchString)).ToList();
+            }
+            else {
+                Result = DbContext.students.OrderBy(std => std.StudentId).Skip(Skip).Take(PageSize).ToList();
+            }
             return Result;
         }
         public Student GetById(int Id)
@@ -23,6 +31,7 @@ namespace DAL
         public List<Student> GetAll() {
             return DbContext.students.ToList();
         }
+      
         public Student Add(Student std)
         {
             DbContext.students.Add(std);

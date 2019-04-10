@@ -17,18 +17,18 @@ namespace MyMVCApplication.Controllers
         ClassesService ClassesSVC = new ClassesService();
         // GET: Student
 
-        public ActionResult Index(int page =1)
+        public ActionResult Index(string SearchString ,int page =1)
         {
             StudentViewModel Model = new StudentViewModel();
             int PageSize = 3;
             int Skip = (page * PageSize) - PageSize;
-            Model.Students = StudentSVC.Get(Skip, PageSize);
-            Model.Classes = ClassesSVC.Get();
-            ViewBag.Count = StudentSVC.GetAll().Count();
+            ViewBag.CurrentFilter = SearchString;
+            ViewBag.Count = StudentSVC.Get(Skip, PageSize, SearchString).Count();
             ViewBag.TotalPage = (ViewBag.Count / PageSize) + ((ViewBag.Count % PageSize) > 0 ? 1 : 0);
+            Model.Students = StudentSVC.Get(Skip, PageSize, SearchString);
+            Model.Classes = ClassesSVC.Get();
             return View(Model);
         }
-
         public ActionResult Edit(int? Id)
         {
             Student student;
@@ -50,10 +50,9 @@ namespace MyMVCApplication.Controllers
             if (ModelState.IsValid)
             {
                 var students = StudentSVC.GetAll();
-                bool nameAlreadyExists = students.Exists(x => x.fname == std.fname && x.mname == std.mname && x.lname == std.lname && x.StudentId != std.StudentId);
+                bool nameAlreadyExists = StudentSVC.NameAlreadyExist(std);
                 if (nameAlreadyExists  ) {
                     ModelState.AddModelError(String.Empty, "Student Name already exist");
-                    return View(std);
                 }
                 if (std.StudentId == 0)
                 {

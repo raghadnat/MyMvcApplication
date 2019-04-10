@@ -22,6 +22,7 @@ namespace DAL.Entity
         public int Age { get; set; }
         public gender gender { set; get; }
         public ContactInfo contactInfo { set; get; }
+        
 
     }
     public enum gender
