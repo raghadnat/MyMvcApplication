@@ -1,1 +1,129 @@
-﻿
+﻿@model MyMVCApplication.Models.AssignClassViewModel
+@{
+                /**/
+
+                Layout = "~/Views/Shared/_LayoutNew.cshtml";
+}
+<div>
+    <h4>Student</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.fname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.lname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Active)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Active)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreationDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreationDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Age)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Age)
+        </dd>
+
+    </dl>
+</div>
+<br />
+<p>Classes</p>
+<div>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayName("Name")
+            </th>
+            <th>
+                @Html.DisplayName("StartTime")
+            </th>
+            <th>
+                @Html.DisplayName("EndTime")
+            </th>
+            <th>
+                @Html.DisplayName("TeacherID")
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.Classes)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TeacherID)
+                </td>
+                <td>
+                    @Html.ActionLink("Add", "AddStudentClass", new { id = Model.StudentId, ClassID = item.ID }) |
+                    @Html.ActionLink("Delete","DeleteStudentClass",new {  id = Model.StudentId, ClassID = item.ID })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+<br />
+<p>Student Class</p>
+<table class=" table">
+    @foreach (var item in Model.StudentClasses)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TeacherID)
+            </td>
+
+        </tr>
+    }
+</table>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

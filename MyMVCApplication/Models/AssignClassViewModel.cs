@@ -8,6 +8,7 @@ namespace MyMVCApplication.Models
 {
     public class AssignClassViewModel
     {
+        public int StudentId { set; get; }
         public String fname { set; get; }
         public String mname { set; get; }
         public String lname { set; get; }
@@ -15,13 +16,9 @@ namespace MyMVCApplication.Models
         public gender gender { set; get; }
         public bool Active { set; get; }
         public DateTime CreationDate { get; set; }
-
+        public List<Classes> StudentClasses { set; get; }
         public List<Classes> Classes { set; get; }
     }
 
-    public enum gender
-    {
-        male,
-        female
-    }
+    
 }

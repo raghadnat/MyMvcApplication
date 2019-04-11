@@ -23,7 +23,7 @@ namespace MyMVCApplication.Controllers
             int PageSize = 3;
             int Skip = (page * PageSize) - PageSize;
             ViewBag.CurrentFilter = SearchString;
-            ViewBag.Count = StudentSVC.Get(Skip, PageSize, SearchString).Count();
+            ViewBag.Count = StudentSVC.GetAll().Count();
             ViewBag.TotalPage = (ViewBag.Count / PageSize) + ((ViewBag.Count % PageSize) > 0 ? 1 : 0);
             Model.Students = StudentSVC.Get(Skip, PageSize, SearchString);
             Model.Classes = ClassesSVC.Get();
@@ -89,8 +89,30 @@ namespace MyMVCApplication.Controllers
             var result = StudentSVC.GetById(Id);
             return View(result);
         }
-        public ActionResult AssignStudentToClass() {
-            return PartialView();
+        public ActionResult AssignStudentToClass(int Id) {
+            AssignClassViewModel model = new AssignClassViewModel();
+            var Result = StudentSVC.GetById(Id);
+            model.StudentId = Result.StudentId;
+            model.fname = Result.fname;
+            model.mname = Result.mname;
+            model.lname = Result.lname;
+            model.gender = Result.gender;
+            model.Age = Result.Age;
+            model.Active = Result.Active;
+            model.CreationDate = Result.CreationDate;
+            model.Classes = ClassesSVC.Get();
+            model.StudentClasses = StudentSVC.getclass(Id);
+            return PartialView(model);
         }
+        public ActionResult AddStudentClass(int Id , int ClassID) {
+            StudentSVC.AddClass(Id, ClassID);
+            return RedirectToAction("AssignStudentToClass", new { Id = Id });
+        }
+        public ActionResult DeleteStudentClass(int Id, int ClassID) {
+            StudentSVC.DeleteClass(Id, ClassID);
+            
+            return RedirectToAction("AssignStudentToClass", new { Id = Id });
+        }
+       
     }
 }

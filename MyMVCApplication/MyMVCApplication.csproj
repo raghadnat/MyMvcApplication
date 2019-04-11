@@ -162,14 +162,14 @@
     <Content Include="Global.asax" />
     <Content Include="Areas\admin\Views\web.config" />
     <Content Include="Areas\admin\Views\AdminTools\GetTools.cshtml" />
-    <Content Include="Sidebar\sidebar.css" />
-    <Content Include="Views\Shared\_LayoutNew.cshtml" />
+    <Content Include="Sidebar\Sidebar.css" />
     <Content Include="Views\Student\Details.cshtml" />
     <Content Include="Views\Classes\Index.cshtml" />
     <Content Include="Views\Classes\Edit.cshtml" />
     <Content Include="Views\Teacher\Index.cshtml" />
     <Content Include="Views\Teacher\Edit.cshtml" />
     <Content Include="Views\Student\AssignStudentToClass.cshtml" />
+    <Content Include="Views\Shared\_LayoutNew.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />

@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutNew.cshtml";
 }
 
 <h2>Index</h2>
@@ -9,9 +10,9 @@
 <p>
     @Html.ActionLink("Create New", "Edit")
 </p>
-@using (Html.BeginForm("Index","Student"))
+@using (Html.BeginForm("Index", "Student"))
 {
-    
+
     <div>
         Search By Name @Html.TextBox("SearchString")
         <input type="submit" value="Search" class="btn btn-default" />
@@ -43,32 +44,32 @@
 
     @foreach (var item in Model.Students)
     {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.fname)
-        @Html.DisplayFor(modelItem => item.mname)
-        @Html.DisplayFor(modelItem => item.lname)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Age)
-    </td>
-    <td>
-        @Html.DisplayFor(modelitem => item.gender)
-    </td>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.fname)
+                @Html.DisplayFor(modelItem => item.mname)
+                @Html.DisplayFor(modelItem => item.lname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Age)
+            </td>
+            <td>
+                @Html.DisplayFor(modelitem => item.gender)
+            </td>
 
-    <td>
-        @Html.DisplayFor(modelitem => item.Active)
-    </td>
-    <td>
-        @Html.DisplayFor(modelitem => item.CreationDate)
-    </td>
-    <td>
-        @Html.ActionLink("Edit", "Edit", new { id = item.StudentId }) |
-        @Html.ActionLink("Details", "Details", new { id = item.StudentId }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.StudentId }) |
-        @Html.ActionLink("AssignClass","AssignStudentToClass")
-    </td>
-</tr>
+            <td>
+                @Html.DisplayFor(modelitem => item.Active)
+            </td>
+            <td>
+                @Html.DisplayFor(modelitem => item.CreationDate)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.StudentId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.StudentId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.StudentId }) |
+                @Html.ActionLink("AssignClass", "AssignStudentToClass", new { id = item.StudentId })
+            </td>
+        </tr>
     }
 
 </table>
@@ -93,41 +94,40 @@
 
     @foreach (var item in Model.Classes)
     {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.Name)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.StartTime)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.EndTime)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.TeacherID)
-    </td>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TeacherID)
+            </td>
 
-</tr>
+        </tr>
     }
 
 
 </table>
-<nav>
-    <ul class="pagination">
-        <li aria-label="pravious">
-            <a href="#" aria-hidden="true">&laquo;</a>
+
+<ul class="pagination">
+    <li aria-label="pravious">
+        <a href="@Url.Action("Index", new { page = 1})," ,aria-hidden="true" class="btn btn-sm btn-info">&laquo;</a>
+    </li>
+    @for (int i = 1; i <= @ViewBag.TotalPage; i++)
+    {
+        <li>
+            <a href="@Url.Action("Index", new { page = i  , SearchString = @ViewBag.CurrentFilter})" class="btn btn-sm btn-info">@i</a>
         </li>
-        @for (int i=1;i<= ViewBag.TotalPage; i++)
-        {
-            <li>
-                <a href="@Url.Action("Index", new { page = i  , SearchString = @ViewBag.CurrentFilter})">@i</a>
-            </li>
-        }
-        <li aria-label="Next">
-            <a href="#" aria-hidden="true">&raquo;</a>
-        </li>
-    </ul>
-</nav>
+    }
+    <li aria-label="Next">
+        <a href="@Url.Action("Index", new { page = @ViewBag.TotalPage })" ,aria-hidden="true" class="btn btn-sm btn-info">&raquo;</a>
+    </li>
+</ul>
 
 
 

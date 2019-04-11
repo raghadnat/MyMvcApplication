@@ -47,5 +47,14 @@ namespace BLL
             bool nameAlreadyExists = StudentDAL.GetAll().Exists(x => x.fname == std.fname && x.mname == std.mname && x.lname == std.lname && x.StudentId != std.StudentId);
             return nameAlreadyExists;
         }
+        public Student AddClass(int StudentID, int ID) {
+            return StudentDAL.AddClass(StudentID, ID);
+        }
+        public List<Classes> getclass(int id) {
+            return StudentDAL.getclass(id);
+        }
+        public Classes DeleteClass(int id , int ClassId){
+            return StudentDAL.DeleteClass(id, ClassId);
+        }
     }
 }

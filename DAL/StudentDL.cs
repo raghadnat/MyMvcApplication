@@ -58,6 +58,26 @@ namespace DAL
             DbContext.SaveChanges();
             return student;
         }
+        public Student AddClass(int StudentID , int ID ) {
+            var Class = DbContext.Classes.Where(x => x.ID == ID).FirstOrDefault();
+            var Result = DbContext.students.Include("Classes").FirstOrDefault(s => s.StudentId == StudentID); 
+            Result.Classes.Add(Class);
+            DbContext.SaveChanges();
+            return Result;
+        }
+        public List<Classes> getclass(int id) {
+            var result = DbContext.students.Include("Classes").FirstOrDefault(s => s.StudentId == id);
+            List<Classes> list = result.Classes.ToList();
+            return list;
+        }
+        public Classes DeleteClass(int id,int ClassID) {
+            var student = DbContext.students.Include("Classes").FirstOrDefault(s => s.StudentId == id);
+            var studentclass = student.Classes.Where(x => x.ID == ClassID).FirstOrDefault();
+            student.Classes.Remove(studentclass);
+            DbContext.SaveChanges();
+            return studentclass;
+        }
+
 
 
     }
